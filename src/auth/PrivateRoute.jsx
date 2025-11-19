@@ -16,8 +16,8 @@ export default function PublicRoute({ children }) {
     user.token &&
     storedToken === user.token;
 
-  if (isAuthenticated) {
-    return <Navigate to="/dashboard" replace />;
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
   }
 
   return children;

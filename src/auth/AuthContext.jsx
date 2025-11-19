@@ -12,7 +12,7 @@ export default function AuthProvider({ children }) {
 
 //   const login = (data) => {
 //     localStorage.setItem("token", JSON.stringify(data.token));
-//     console.log(data.token,"data");
+    
 //     localStorage.setItem("user", JSON.stringify(data.user));
 //     setUser(data.user);
 //   };
@@ -24,7 +24,7 @@ const login = (data) => {
   localStorage.setItem("user", JSON.stringify(userWithToken));
   setUser(userWithToken);
 };
-console.log(user,"User");
+
 
   const logout = () => {
     localStorage.removeItem("token");
