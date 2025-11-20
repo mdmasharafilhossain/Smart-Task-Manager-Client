@@ -50,7 +50,7 @@ export default function Register() {
               type="text"
               {...register("name", { required: "Name is required" })}
               className="w-full border border-[#E6E9EB] px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8FABD4]/40"
-              placeholder="Jane Doe"
+              placeholder="MD Mashrafil Hossain"
             />
             {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
           </div>
@@ -65,7 +65,7 @@ export default function Register() {
                 pattern: { value: /^\S+@\S+\.\S+$/, message: "Invalid email" },
               })}
               className="w-full border border-[#E6E9EB] px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8FABD4]/40"
-              placeholder="you@company.com"
+              placeholder="your@email.com"
             />
             {errors.email && <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>}
           </div>
@@ -93,7 +93,6 @@ export default function Register() {
             </div>
             {errors.password && <p className="text-red-600 text-sm mt-1">{errors.password.message}</p>}
 
-            {/* simple strength hint */}
             {password && (
               <p className="text-xs mt-2 text-[#4A4A4A]">
                 Password strength:{" "}
@@ -104,7 +103,7 @@ export default function Register() {
             )}
           </div>
 
-          {/* Submit */}
+          
           <button
             type="submit"
             disabled={isSubmitting}

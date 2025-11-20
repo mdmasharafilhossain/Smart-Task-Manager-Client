@@ -52,12 +52,25 @@ const [showPassword, setShowPassword] = useState(false);
 
           <div>
             <label className="block text-sm font-medium text-[#4A4A4A] mb-1">Password</label>
-            <input
-              type="password"
-              {...register("password", { required: "Password is required" })}
-              className="w-full border border-[#E6E9EB] px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8FABD4]/40"
-              placeholder="••••••••"
-            />
+
+            <div className="relative">
+              <input
+                type={showPassword ? "text" : "password"} // 👈 dynamic type
+                {...register("password", { required: "Password is required" })}
+                className="w-full border border-[#E6E9EB] px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8FABD4]/40"
+                placeholder="••••••••"
+              />
+
+              {/* 👁 Icon Toggle */}
+              <button
+                type="button"
+                onClick={() => setShowPassword((prev) => !prev)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[#4A4A4A] hover:text-[#8FABD4]"
+              >
+                {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+              </button>
+            </div>
+
             {errors.password && (
               <p className="text-red-600 text-sm mt-1">{errors.password.message}</p>
             )}
