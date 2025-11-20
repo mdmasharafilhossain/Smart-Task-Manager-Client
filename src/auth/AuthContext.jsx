@@ -1,5 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 import React, { createContext, useState } from "react";
+import api from "../utils/api";
 
 
 export const AuthContext = createContext(null);
@@ -26,9 +27,14 @@ const login = (data) => {
 };
 
 
-  const logout = () => {
+  const logout = async () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    try {
+      await api.post("/auth/logout"); 
+    } catch (e) {
+      console.warn("logout request failed", e);
+    }
     setUser(null);
   };
 

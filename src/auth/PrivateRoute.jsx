@@ -1,24 +1,34 @@
-import { useContext } from "react";
+
+import { useEffect, useState } from "react";
 import { Navigate } from "react-router";
-import { AuthContext } from "./AuthContext";
+import api from "../utils/api";
 
+export default function PrivateRoute({ children }) {
+  const [loading, setLoading] = useState(true);
+  const [allowed, setAllowed] = useState(false);
 
-export default function PublicRoute({ children }) {
-  const { user } = useContext(AuthContext);
+  useEffect(() => {
+    api
+      .get("/auth/me")
+      .then((res) => {
+        const exists = !!res.data?.user;
+        setAllowed(exists);
+        if (!exists) {
+          localStorage.clear(); // <-- remove all data
+        }
+      })
+      .catch(() => {
+        localStorage.clear();   // <-- remove all data
+        setAllowed(false);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
- 
-  const storedToken = JSON.parse(localStorage.getItem("token"));
+  if (loading) return <div>checking.....</div>;
 
-
-  const isAuthenticated =
-    user &&
-    storedToken &&
-    user.token &&
-    storedToken === user.token;
-
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
+  if (!allowed) return <Navigate to="/login" replace />;
 
   return children;
 }

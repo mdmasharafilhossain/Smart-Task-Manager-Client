@@ -15,7 +15,7 @@ export default function Navbar() {
     { name: "Projects", path: "/projects" },
     { name: "Tasks", path: "/tasks" },
   ];
- const handleLogout = () => {
+ const handleLogout = async() => {
     Swal.fire({
       title: "Logout?",
       text: "Are you sure you want to logout?",
@@ -24,9 +24,9 @@ export default function Navbar() {
       confirmButtonText: "Yes, logout",
       cancelButtonText: "Cancel",
       confirmButtonColor: "#8FABD4",
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
-        logout();
+        await logout();
         Swal.fire("Logged out", "You have been successfully logged out.", "success");
       }
     });
