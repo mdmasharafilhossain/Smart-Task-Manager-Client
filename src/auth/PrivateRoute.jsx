@@ -14,11 +14,11 @@ export default function PrivateRoute({ children }) {
         const exists = !!res.data?.user;
         setAllowed(exists);
         if (!exists) {
-          localStorage.clear(); // <-- remove all data
+          localStorage.clear(); 
         }
       })
       .catch(() => {
-        localStorage.clear();   // <-- remove all data
+        localStorage.clear();   
         setAllowed(false);
       })
       .finally(() => {
