@@ -43,7 +43,7 @@ const [showPassword, setShowPassword] = useState(false);
               type="email"
               {...register("email", { required: "Email is required" })}
               className="w-full border border-[#E6E9EB] px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8FABD4]/40"
-              placeholder="you@company.com"
+               placeholder="your@email.com"
             />
             {errors.email && (
               <p className="text-red-600 text-sm mt-1">{errors.email.message}</p>
