@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { Link, useNavigate } from "react-router";
 import api from "../utils/api";
 import { AuthContext } from "./AuthContext";
-
+import { Eye, EyeOff } from "lucide-react";
 export default function Login() {
   const {
     register,
@@ -13,7 +13,7 @@ export default function Login() {
   } = useForm();
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
-
+const [showPassword, setShowPassword] = useState(false);
   const onSubmit = async (Userdata) => {
     try {
       const { data } = await api.post("/auth/login", Userdata);

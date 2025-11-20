@@ -3,6 +3,7 @@ import App from "../App";
 import Login from "../auth/Login";
 import Dashboard from "../pages/dashboard";
 import PrivateRoute from "../auth/PrivateRoute";
+import Register from "../auth/Register";
 
 export const router = createBrowserRouter([
   {
@@ -14,8 +15,8 @@ export const router = createBrowserRouter([
             path:"/login"
         },
         {
-            element:<Login/>,
-            path:"/login"
+            element:<Register/>,
+            path:"/register"
         },
         {
              
