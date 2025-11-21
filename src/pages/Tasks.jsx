@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/set-state-in-effect */
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -13,15 +14,15 @@ export default function Tasks() {
     handleSubmit,
     reset,
     watch,
-    setValue,
+    
     formState: { errors, isSubmitting },
   } = useForm({ defaultValues: { priority: "Medium", status: "Pending" }});
   const [projects, setProjects] = useState([]);
   const [tasks, setTasks] = useState([]);
-  const [members, setMembers] = useState([]); // for dropdown (with load/capacity)
+  const [members, setMembers] = useState([]); 
   const [filters, setFilters] = useState({ projectId: "", assigneeId: "" });
-  const [loading, setLoading] = useState(true); // initial loader
-  const [membersLoading, setMembersLoading] = useState(false); // small loader for member loads
+  const [loading, setLoading] = useState(true); 
+  const [membersLoading, setMembersLoading] = useState(false); 
 
   const chosenProject = watch("projectId");
 
@@ -47,7 +48,7 @@ export default function Tasks() {
     }
   };
 
-  // load all initial data
+
   const loadAll = async () => {
     setLoading(true);
     try {
@@ -76,7 +77,7 @@ export default function Tasks() {
       };
       const { data } = await api.post("/tasks", payload);
 
-      // Over-capacity warning (only if not auto-assign and assigned to someone)
+      
       if (!autoAssign && payload.assigneeId) {
         const m = members.find(x => x.memberId === payload.assigneeId);
         if (m && m.load + 1 > m.capacity) {
@@ -88,7 +89,7 @@ export default function Tasks() {
             cancelButtonText: "Choose Another"
           });
           if (!res.isConfirmed) {
-            // revert: delete created task for safety, ask to pick another
+         
             await api.delete(`/tasks/${data._id}`);
             return;
           }
@@ -155,7 +156,7 @@ export default function Tasks() {
 
           <div className="md:col-span-3">
             <label className="block text-sm text-[#4A4A4A] mb-1">Description</label>
-            <textarea className="w-full border px-3 py-2 rounded-lg min-h-[80px] focus:outline-none focus:ring-2 focus:ring-[#8FABD4]/30" placeholder="Description" {...register("description")}></textarea>
+            <textarea className="w-full border px-3 py-2 rounded-lg min-h-20 focus:outline-none focus:ring-2 focus:ring-[#8FABD4]/30" placeholder="Description" {...register("description")}></textarea>
           </div>
 
           <div className="md:col-span-2">
@@ -223,12 +224,11 @@ export default function Tasks() {
         </div>
       </div>
 
-      {/* Tasks Table */}
-      {/* Tasks Card (responsive table + mobile cards) */}
+      
 <div className="bg-white p-6 rounded-2xl shadow-md border border-[#8FABD4]/10">
   <h2 className="text-lg font-semibold mb-3 text-[#1F2937]">Tasks</h2>
 
-  {/* Desktop table (md and up) */}
+ 
   <div className="hidden md:block overflow-x-auto">
     <table className="w-full text-sm table-auto">
       <thead>
@@ -246,7 +246,7 @@ export default function Tasks() {
           <tr key={t._id} className={`${idx % 2 === 0 ? "bg-white" : "bg-[#FBFDFF]"} border-b`}>
             <td className="p-3 align-top">{t.title}</td>
 
-            {/* Priority badge */}
+            
             <td className="p-3 align-top">
               <span
                 className={
@@ -262,7 +262,7 @@ export default function Tasks() {
               </span>
             </td>
 
-            {/* Status pill */}
+        
             <td className="p-3 align-top">
               <span
                 className={
@@ -282,7 +282,7 @@ export default function Tasks() {
               {t.assigneeId ? (members.find(m => m.memberId === t.assigneeId)?.name || t.assigneeId) : "Unassigned"}
             </td>
 
-            {/* Actions */}
+         
             <td className="p-3 align-top">
               <div className="flex gap-2">
                 <button
@@ -302,7 +302,7 @@ export default function Tasks() {
                     await loadTasks();
                   }}
                 >
-                  {/* simple user icon */}
+           
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A5 5 0 0112 15a5 5 0 016.879 2.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
                   <span>Reassign</span>
                 </button>
@@ -321,7 +321,7 @@ export default function Tasks() {
                     await loadTasks();
                   }}
                 >
-                  {/* simple status icon */}
+                 
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4" /></svg>
                   <span>Status</span>
                 </button>
@@ -335,7 +335,7 @@ export default function Tasks() {
                     await loadTasks();
                   }}
                 >
-                  {/* trash icon */}
+               
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7L5 7M10 11v6M14 11v6M9 7l1-3h4l1 3" /></svg>
                   <span>Delete</span>
                 </button>
@@ -353,7 +353,7 @@ export default function Tasks() {
     </table>
   </div>
 
-  {/* Mobile: stacked cards */}
+
   <div className="md:hidden space-y-3">
     {tasks.length === 0 && (
       <div className="p-4 text-center text-slate-500">No tasks</div>
@@ -384,7 +384,7 @@ export default function Tasks() {
           </div>
         </div>
 
-        {/* action row */}
+      
         <div className="mt-3 flex flex-wrap gap-2">
           <button
             className="flex items-center gap-2 px-3 py-1 rounded border text-sm"
