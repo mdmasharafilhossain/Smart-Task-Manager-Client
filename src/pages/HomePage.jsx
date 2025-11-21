@@ -1,10 +1,11 @@
-import ErrorPage from "../components/ErrorPage";
+import Banner from "../components/Banner";
+
 
 
 const HomePage = () => {
     return (
         <div>
-            <ErrorPage/>
+            <Banner />
         </div>
     );
 };

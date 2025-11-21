@@ -1,18 +1,16 @@
-// Banner.jsx
-import React from "react";
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 
 export default function Banner() {
   return (
-    <header className="bg-[#EFECE3]">
-      {/* Decorative top wave */}
+    <header className="bg-[#EFECE3] min-h-screen">
+   <div className="w-full max-w-xl mx-auto border-t border-[#8FABD4]/20 mt-0.5"></div>
       <div className="relative overflow-hidden">
         <div className="absolute -left-40 -top-24 w-80 h-80 rounded-full bg-[#8FABD4]/10 blur-3xl animate-blob"></div>
         <div className="absolute right-0 -top-16 w-64 h-64 rounded-full bg-[#8FABD4]/8 blur-2xl animate-blob animation-delay-2000"></div>
 
         <div className="max-w-7xl mx-auto px-6 lg:px-10 py-14 md:py-20">
           <div className="grid md:grid-cols-2 gap-10 items-center">
-            {/* Left: copy */}
+        
             <div className="space-y-6">
               <div className="inline-flex items-center gap-3 bg-white/80 border border-[#8FABD4]/20 px-3 py-1 rounded-full shadow-sm w-max">
                 <span className="w-8 h-8 bg-[#8FABD4] rounded-lg flex items-center justify-center text-white font-bold">TM</span>
@@ -28,10 +26,10 @@ export default function Banner() {
                 Manage projects, assign tasks automatically, and keep workloads balanced — all in one elegant dashboard.
               </p>
 
-              {/* CTAs */}
+             
               <div className="flex flex-wrap gap-3 items-center">
                 <Link
-                  to="/signup"
+                  to="/register"
                   className="inline-flex items-center gap-3 px-5 py-3 rounded-lg text-white font-semibold shadow-md"
                   style={{ background: "linear-gradient(90deg,#8FABD4,#6FA8D6)" }}
                   aria-label="Get started — sign up"
@@ -40,15 +38,10 @@ export default function Banner() {
                   <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                 </Link>
 
-                <a
-                  href="#features"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg border border-[#E6E9EB] text-[#4A4A4A] hover:border-[#8FABD4] hover:text-[#8FABD4] transition"
-                >
-                  Learn more
-                </a>
+               
               </div>
 
-              {/* Feature list */}
+            
               <ul id="features" className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4 max-w-md">
                 <li className="flex items-start gap-3">
                   <div className="w-9 h-9 rounded-md bg-white border border-[#E6E9EB] flex items-center justify-center text-[#8FABD4]">
@@ -96,18 +89,18 @@ export default function Banner() {
                 <div className="text-sm text-[#6B7280]">Trusted by growing teams</div>
                 <div className="bg-white border border-[#E6E9EB] rounded-lg px-3 py-2 shadow-sm">
                   <div className="text-sm font-medium text-[#1F2937]">“Task Manager cut our planning time in half.”</div>
-                  <div className="text-xs text-[#6B7280]">— A. Ahmed, Product Lead</div>
+                  <div className="text-xs text-[#6B7280]">--- MD.Mashrafil, Product Lead</div>
                 </div>
               </div>
             </div>
 
-            {/* Right: mockup / illustration */}
+          
             <div className="relative flex items-center justify-center">
               <div className="hidden lg:block absolute -right-12 -bottom-12 w-48 h-48 rounded-full bg-[#8FABD4]/8 blur-2xl"></div>
 
               <div className="w-full max-w-md rounded-2xl shadow-2xl border border-[#E6E9EB] overflow-hidden transform hover:scale-[1.01] transition">
-                {/* Replace bg with an actual screenshot or illustration */}
-                <div className="bg-gradient-to-br from-white to-[#FBFDFF] p-6">
+              
+                <div className="bg-linear-to-br from-white to-[#FBFDFF] p-6">
                   <div className="h-48 bg-[#F7F9FA] rounded-lg border border-[#E6E9EB] flex items-center justify-center text-sm text-[#6B7280]">
                     Dashboard screenshot placeholder
                   </div>
@@ -123,7 +116,7 @@ export default function Banner() {
             </div>
           </div>
 
-          {/* Bottom badges */}
+         
           <div className="mt-10 flex flex-wrap items-center gap-4 text-sm text-[#6B7280]">
             <div className="flex items-center gap-2">
               <span className="w-8 h-8 rounded bg-white border border-[#E6E9EB] flex items-center justify-center text-[#8FABD4] shadow-sm">✓</span>
