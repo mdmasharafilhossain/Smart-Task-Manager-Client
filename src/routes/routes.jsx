@@ -6,6 +6,7 @@ import PrivateRoute from "../auth/PrivateRoute";
 import Register from "../auth/Register";
 import Teams from "../pages/Teams";
 import Projects from "../pages/Projects";
+import Tasks from "../pages/Tasks";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,11 @@ export const router = createBrowserRouter([
              
             element:<PrivateRoute><Projects/></PrivateRoute>,
             path:"/projects"
+        },
+        {
+             
+            element:<PrivateRoute><Tasks/></PrivateRoute>,
+            path:"/tasks"
         }
     ],
   },
