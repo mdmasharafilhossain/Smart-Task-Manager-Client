@@ -6,8 +6,8 @@ import Swal from "sweetalert2";
 import api from "../utils/api";
 
 export default function Teams() {
-  const { register, handleSubmit, reset } = useForm();
-  const { register: regM, handleSubmit: handleMember, reset: resetM } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
+  const { register: regM, handleSubmit: handleMember, reset: resetM, formState: { errors: errorsM } } = useForm();
   const [teams, setTeams] = useState([]);
 
   const load = async () => {
@@ -33,37 +33,91 @@ export default function Teams() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="bg-white p-4 rounded-xl shadow">
-        <h1 className="text-lg font-semibold mb-3">Create Team</h1>
-        <form onSubmit={handleSubmit(onCreateTeam)} className="flex flex-col md:flex-row gap-2">
-          <input className="border px-3 py-2 rounded w-full md:w-80" placeholder="Team name" {...register("name")} />
-          <button className="px-4 py-2 bg-slate-900 text-white rounded">Create</button>
+    <div className="space-y-6 p-4">
+      {/* Create Team Card */}
+      <div className="bg-white p-5 rounded-2xl shadow-sm border border-[#8FABD4]/10">
+        <h1 className="text-lg font-semibold mb-3 text-[#1F2937]">Create Team</h1>
+
+        <form onSubmit={handleSubmit(onCreateTeam)} className="flex flex-col md:flex-row gap-3 items-start">
+          <div className="flex-1 w-full">
+            <input
+              className={`w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8FABD4]/30 ${errors.name ? "border-red-400" : "border-[#E6E9EB]"}`}
+              placeholder="Team name"
+              {...register("name", { required: "Team name is required" })}
+            />
+            {errors.name && <p className="text-red-600 text-sm mt-1">{errors.name.message}</p>}
+          </div>
+
+          <button
+            type="submit"
+            className="px-4 py-2 bg-gradient-to-r from-[#8FABD4] to-[#6FA8D6] text-white rounded-lg shadow-sm"
+          >
+            Create
+          </button>
         </form>
       </div>
 
+      {/* Teams List */}
       {teams.map(t => (
-        <div key={t._id} className="bg-white p-4 rounded-xl shadow">
-          <div className="flex items-center justify-between mb-2">
-            <h2 className="text-lg font-semibold">{t.name}</h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-2">
-            {t.members.map(m => (
-              <div key={m._id} className="border rounded p-2">
-                <div className="font-medium">{m.name}</div>
-                <div className="text-sm text-slate-600">{m.role}</div>
-                <div className="text-sm">Capacity: {m.capacity}</div>
-              </div>
-            ))}
+        <div key={t._id} className="bg-white p-5 rounded-2xl shadow-sm border border-[#8FABD4]/10">
+          <div className="flex items-center justify-between mb-3">
+            <h2 className="text-lg font-semibold text-[#1F2937]">{t.name}</h2>
+            <div className="text-sm text-[#4A4A4A]">Members: {t.members?.length || 0}</div>
           </div>
 
-          <div className="mt-4">
-            <h3 className="font-medium mb-2">Add Member</h3>
-            <form onSubmit={handleMember(onAddMember.bind(null, t._id))} className="grid md:grid-cols-4 gap-2">
-              <input className="border px-3 py-2 rounded" placeholder="Name" {...regM("name", { required: true })} />
-              <input className="border px-3 py-2 rounded" placeholder="Role" {...regM("role")} />
-              <input className="border px-3 py-2 rounded" type="number" min="0" max="5" placeholder="Capacity (0-5)" {...regM("capacity")} />
-              <button className="px-4 py-2 bg-slate-900 text-white rounded">Add</button>
+          <div className="grid md:grid-cols-3 gap-3 mb-4">
+            {t.members && t.members.length ? (
+              t.members.map(m => (
+                <div key={m._id} className="border rounded-lg p-3 bg-white">
+                  <div className="font-medium text-[#1F2937]">{m.name}</div>
+                  <div className="text-sm text-[#4A4A4A]">{m.role}</div>
+                  <div className="text-sm text-[#4A4A4A]">Capacity: {m.capacity}</div>
+                </div>
+              ))
+            ) : (
+              <div className="text-sm text-[#4A4A4A]">No members yet</div>
+            )}
+          </div>
+
+          <div>
+            <h3 className="font-medium mb-3 text-[#1F2937]">Add Member</h3>
+
+            <form onSubmit={handleMember((values) => onAddMember(t._id, values))} className="grid md:grid-cols-4 gap-3 items-end">
+              <div>
+                <input
+                  className={`w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8FABD4]/30 ${errorsM.name ? "border-red-400" : "border-[#E6E9EB]"}`}
+                  placeholder="Name"
+                  {...regM("name", { required: "Member name is required" })}
+                />
+                {errorsM.name && <p className="text-red-600 text-sm mt-1">{errorsM.name.message}</p>}
+              </div>
+
+              <div>
+                <input
+                  className="w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8FABD4]/30 border-[#E6E9EB]"
+                  placeholder="Role (optional)"
+                  {...regM("role")}
+                />
+                {errorsM.role && <p className="text-red-600 text-sm mt-1">{errorsM.role.message}</p>}
+              </div>
+
+              <div>
+                <input
+                  type="number"
+                  min="0"
+                  max="5"
+                  className={`w-full border px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8FABD4]/30 ${errorsM.capacity ? "border-red-400" : "border-[#E6E9EB]"}`}
+                  placeholder="Capacity (0-5)"
+                  {...regM("capacity", {
+                    validate: v => (v === "" || (Number(v) >= 0 && Number(v) <= 5)) || "Capacity must be between 0 and 5"
+                  })}
+                />
+                {errorsM.capacity && <p className="text-red-600 text-sm mt-1">{errorsM.capacity.message}</p>}
+              </div>
+
+              <div>
+                <button className="w-full py-2 bg-gradient-to-r from-[#8FABD4] to-[#6FA8D6] text-white rounded-lg shadow-sm">Add</button>
+              </div>
             </form>
           </div>
         </div>

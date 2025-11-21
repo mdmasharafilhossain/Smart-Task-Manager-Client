@@ -4,6 +4,7 @@ import Login from "../auth/Login";
 import Dashboard from "../pages/dashboard";
 import PrivateRoute from "../auth/PrivateRoute";
 import Register from "../auth/Register";
+import Teams from "../pages/Teams";
 
 export const router = createBrowserRouter([
   {
@@ -22,6 +23,11 @@ export const router = createBrowserRouter([
              
             element:<PrivateRoute> <Dashboard/></PrivateRoute>,
             path:"/dashboard"
+        },
+        {
+             
+            element:<PrivateRoute><Teams/></PrivateRoute>,
+            path:"/teams"
         }
     ],
   },
