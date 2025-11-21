@@ -35,7 +35,7 @@ export default function Navbar() {
 
 
   return (
-    <nav className="w-full bg-[#EFECE3] text-black shadow-xl">
+    <nav className="fixed top-0 z-50  w-full bg-[#EFECE3] text-black shadow-xl">
       <div className="container  mx-auto px-4 py-3 flex items-center justify-between">
 
        
@@ -47,49 +47,69 @@ export default function Navbar() {
         </Link>
 
      
-        <div className="hidden md:flex items-center justify-center align-middle gap-6">
-          {navItems.map((item) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              className={({ isActive }) =>
-                `text-base hover:text-[#8fabd4] transition ${
-                  isActive ? "text-[#8FABD4] font-semibold" : "text-[#4A4A4A]"
-                }`
-              }
-            >
-              {item.name}
-            </NavLink>
-          ))}
+        {/* Desktop Menu */}
+<div className="hidden md:flex items-center justify-center align-middle gap-6">
 
-          
-          {user ? (
-            <div className="flex items-center gap-4">
-              <span className="text-[#4A4A4A] font-medium">
-                {user?.name || "User"}
-              </span>
+  
+  {!user ? (
+    <>
+      <NavLink
+        to="/"
+        className={({ isActive }) =>
+          `text-base hover:text-[#8fabd4] transition ${
+            isActive ? "text-[#8FABD4] font-semibold" : "text-[#4A4A4A]"
+          }`
+        }
+      >
+        Home
+      </NavLink>
 
-              <button
-                onClick={handleLogout}
-                className="px-4 py-1.5 rounded-lg text-white"
-                style={{
-                  background: "linear-gradient(90deg,#8FABD4,#6FA8D6)",
-                }}
-              >
-                Logout
-              </button>
-            </div>
-          ) : (
-            <NavLink
-              to="/login"
-              className="text-base font-medium hover:text-[#8FABD4]"
-            >
-              Login
-            </NavLink>
-          )}
-        </div>
+      <NavLink
+        to="/login"
+        className="text-base font-medium hover:text-[#8FABD4]"
+      >
+        Login
+      </NavLink>
+    </>
+  ) : (
+    <>
+      
+      {navItems.map((item) => (
+        <NavLink
+          key={item.path}
+          to={item.path}
+          className={({ isActive }) =>
+            `text-base hover:text-[#8fabd4] transition ${
+              isActive ? "text-[#8FABD4] font-semibold" : "text-[#4A4A4A]"
+            }`
+          }
+        >
+          {item.name}
+        </NavLink>
+      ))}
 
-        {/* Mobile Toggle */}
+      <div className="flex items-center lg:ml-20 gap-4">
+        <span className="text-[#4A4A4A] font-medium">
+          {user?.name || "User"}
+        </span>
+
+        <button
+          onClick={handleLogout}
+          className="px-4 py-1.5 rounded-lg text-white"
+          style={{
+            background: "linear-gradient(90deg,#8FABD4,#6FA8D6)",
+          }}
+        >
+          Logout
+        </button>
+      </div>
+    </>
+  )}
+
+</div>
+
+
+   
         <button
           className="md:hidden text-[#4A4A4A] hover:text-[#8FABD4]"
           onClick={() => setOpen(!open)}
@@ -98,55 +118,69 @@ export default function Navbar() {
         </button>
       </div>
 
+     
       {/* Mobile Menu */}
-      {open && (
-        <div className="md:hidden bg-[#EFECE3] px-4 pb-4 flex flex-col gap-3 border-t border-[#8FABD4]/30">
+{open && (
+  <div className="md:hidden bg-[#EFECE3] px-4 pb-4 flex flex-col gap-3 border-t border-[#8FABD4]/30">
 
-          {navItems.map((item) => (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              onClick={() => setOpen(false)}
-              className={({ isActive }) =>
-                `block py-2 text-base border-b border-[#8FABD4] hover:text-[#8FABD4] transition ${
-                  isActive ? "text-[#8FABD4] font-semibold" : "text-[#4A4A4A]"
-                }`
-              }
-            >
-              {item.name}
-            </NavLink>
-          ))}
+    {!user ? (
+      <>
+        <NavLink
+          to="/"
+          onClick={() => setOpen(false)}
+          className="block py-2 text-base border-b border-[#8FABD4] hover:text-[#8FABD4] transition"
+        >
+          Home
+        </NavLink>
 
-          {/* Mobile user area */}
-          {user ? (
-            <div className="flex flex-col gap-2 mt-3">
-              <span className="text-[#4A4A4A] font-medium">
-                {user?.name || "User"}
-              </span>
-              <button
-                onClick={() => {
-                  logout();
-                  setOpen(false);
-                }}
-                className="py-2 rounded-lg text-white"
-                style={{
-                  background: "linear-gradient(90deg,#8FABD4,#6FA8D6)",
-                }}
-              >
-                Logout
-              </button>
-            </div>
-          ) : (
-            <NavLink
-              to="/login"
-              onClick={() => setOpen(false)}
-              className="text-base underline text-[#4A4A4A] mt-2"
-            >
-              Login
-            </NavLink>
-          )}
+        <NavLink
+          to="/login"
+          onClick={() => setOpen(false)}
+          className="block py-2 text-base border-b border-[#8FABD4] hover:text-[#8FABD4] transition"
+        >
+          Login
+        </NavLink>
+      </>
+    ) : (
+      <>
+        {navItems.map((item) => (
+          <NavLink
+            key={item.path}
+            to={item.path}
+            onClick={() => setOpen(false)}
+            className={({ isActive }) =>
+              `block py-2 text-base border-b border-[#8FABD4] hover:text-[#8FABD4] transition ${
+                isActive ? "text-[#8FABD4] font-semibold" : "text-[#4A4A4A]"
+              }`
+            }
+          >
+            {item.name}
+          </NavLink>
+        ))}
+
+        <div className="flex flex-col gap-2 mt-3">
+          <span className="text-[#4A4A4A] font-medium">
+            {user?.name || "User"}
+          </span>
+
+          <button
+            onClick={() => {
+              handleLogout();
+              setOpen(false);
+            }}
+            className="py-2 rounded-lg text-white"
+            style={{
+              background: "linear-gradient(90deg,#8FABD4,#6FA8D6)",
+            }}
+          >
+            Logout
+          </button>
         </div>
-      )}
+      </>
+    )}
+  </div>
+)}
+
     </nav>
   );
 }

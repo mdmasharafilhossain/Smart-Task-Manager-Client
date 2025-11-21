@@ -283,7 +283,7 @@ export default function Tasks() {
             </td>
 
          
-            <td className="p-3 align-top">
+              <td className="p-3 align-top">
               <div className="flex gap-2">
                 <button
                   className="flex items-center gap-2 px-3 py-1 rounded border hover:shadow-sm text-sm"
@@ -300,6 +300,7 @@ export default function Tasks() {
                     if (!res.isConfirmed) return;
                     await api.put(`/tasks/${t._id}`, { assigneeId: res.value === "" ? null : res.value });
                     await loadTasks();
+                    Swal.fire("Success", "Assignee updated", "success");
                   }}
                 >
            
@@ -319,6 +320,7 @@ export default function Tasks() {
                     if (!res.isConfirmed) return;
                     await api.put(`/tasks/${t._id}`, { status: res.value });
                     await loadTasks();
+                    Swal.fire("Success", "Status updated", "success");
                   }}
                 >
                  
@@ -333,6 +335,7 @@ export default function Tasks() {
                     if (!isConfirmed) return;
                     await api.delete(`/tasks/${t._id}`);
                     await loadTasks();
+                    Swal.fire("Deleted", "Task removed", "success");
                   }}
                 >
                
