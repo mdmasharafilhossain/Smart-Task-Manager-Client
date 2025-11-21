@@ -10,6 +10,7 @@ export default function Navbar() {
   const { user, logout } = useContext(AuthContext);
 
   const navItems = [
+    { name: "Home", path: "/" },
     { name: "Dashboard", path: "/dashboard" },
     { name: "Teams", path: "/teams" },
     { name: "Projects", path: "/projects" },

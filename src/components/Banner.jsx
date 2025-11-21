@@ -1,5 +1,5 @@
-import { Link } from "react-router";
-
+import { Link, NavLink } from "react-router";
+ const bgImage = "sandbox:/mnt/data/a116ffb8-7562-4aa9-8197-4db9843c00f9.png";
 export default function Banner() {
   return (
     <header className="bg-[#EFECE3] min-h-screen">
@@ -84,7 +84,7 @@ export default function Banner() {
                 </li>
               </ul>
 
-              {/* small trust / testimonial */}
+         
               <div className="mt-6 flex flex-col sm:flex-row gap-3 items-start sm:items-center">
                 <div className="text-sm text-[#6B7280]">Trusted by growing teams</div>
                 <div className="bg-white border border-[#E6E9EB] rounded-lg px-3 py-2 shadow-sm">
@@ -95,25 +95,108 @@ export default function Banner() {
             </div>
 
           
-            <div className="relative flex items-center justify-center">
-              <div className="hidden lg:block absolute -right-12 -bottom-12 w-48 h-48 rounded-full bg-[#8FABD4]/8 blur-2xl"></div>
+            <div className="relative flex items-center justify-center py-6">
+     
+      <img
+        src={bgImage}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 w-full h-full object-cover opacity-30 filter blur-xl scale-105"
+        style={{ mixBlendMode: "lighten" }}
+      />
 
-              <div className="w-full max-w-md rounded-2xl shadow-2xl border border-[#E6E9EB] overflow-hidden transform hover:scale-[1.01] transition">
-              
-                <div className="bg-linear-to-br from-white to-[#FBFDFF] p-6">
-                  <div className="h-48 bg-[#F7F9FA] rounded-lg border border-[#E6E9EB] flex items-center justify-center text-sm text-[#6B7280]">
-                    Dashboard screenshot placeholder
-                  </div>
+     
+      <div className="pointer-events-none absolute -left-10 -top-8 w-44 h-44 rounded-full bg-[#8FABD4]/10 blur-3xl animate-blob"></div>
+      <div className="pointer-events-none absolute right-0 top-10 w-36 h-36 rounded-full bg-[#8FABD4]/8 blur-2xl animate-blob animation-delay-2000"></div>
 
-                  <div className="mt-4 grid grid-cols-3 gap-3">
-                    <div className="p-3 bg-white rounded-lg border border-[#E6E9EB] text-center text-xs">Projects</div>
-                    <div className="p-3 bg-white rounded-lg border border-[#E6E9EB] text-center text-xs">Tasks</div>
-                    <div className="p-3 bg-white rounded-lg border border-[#E6E9EB] text-center text-xs">Teams</div>
-                  </div>
+    
+      <div className="relative w-full max-w-lg transform transition-transform hover:-translate-y-1 hover:scale-[1.01]">
+        <div className="rounded-2xl shadow-2xl border border-[#E6E9EB] overflow-hidden bg-white">
+        
+          <div className="flex items-center justify-between px-4 py-3 bg-white/80 border-b border-[#EEF2F4]">
+            <div className="flex items-center gap-3">
+              <span className="w-3 h-3 rounded-full bg-[#FC5C65] shadow-sm"></span>
+              <span className="w-3 h-3 rounded-full bg-[#F5C84C] shadow-sm"></span>
+              <span className="w-3 h-3 rounded-full bg-[#6ACB64] shadow-sm"></span>
+              <div className="ml-3 text-xs text-[#6B7280]">Preview</div>
+            </div>
+            <div className="text-xs text-[#9CA3AF]">task-manager.local</div>
+          </div>
+
+          
+          <div className="p-6 bg-linear-to-br from-white to-[#FBFDFF]">
+       
+            <div className="flex items-center justify-between mb-4">
+              <div>
+                <div className="text-sm text-[#6B7280]">Overview</div>
+                <div className="text-xl font-semibold text-[#1F2937]">Team workload</div>
+              </div>
+              <div className="text-xs text-[#6B7280]">Updated now</div>
+            </div>
+
+           
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            
+              <div className="md:col-span-2 bg-[#F7FAFC] rounded-lg border border-[#EEF2F4] p-3">
+                <div className="h-28 rounded-md bg-linear-to-r from-[#EFF6FF] to-[#F7FBFF] shadow-inner flex items-end gap-1 px-2">
+                 
+                  <div className="w-8 h-12 rounded-t bg-[#8FABD4] opacity-90" />
+                  <div className="w-6 h-20 rounded-t bg-[#6FA8D6]" />
+                  <div className="w-6 h-10 rounded-t bg-[#8FABD4]/80" />
+                  <div className="w-8 h-16 rounded-t bg-[#6FA8D6]/90" />
+                  <div className="w-6 h-8 rounded-t bg-[#8FABD4]/60" />
+                </div>
+                <div className="mt-3 flex gap-3">
+                  <div className="flex-1 bg-white rounded-lg border border-[#E6E9EB] p-2 text-xs text-center">Active projects</div>
+                  <div className="flex-1 bg-white rounded-lg border border-[#E6E9EB] p-2 text-xs text-center">Open tasks</div>
                 </div>
               </div>
 
+             
+              <div className="space-y-3">
+                <div className="bg-white rounded-lg border border-[#E6E9EB] p-3 text-sm">
+                  <div className="text-xs text-[#6B7280]">Members</div>
+                  <div className="font-medium text-[#1F2937]">12</div>
+                </div>
+                <div className="bg-white rounded-lg border border-[#E6E9EB] p-3 text-sm">
+                  <div className="text-xs text-[#6B7280]">Capacity</div>
+                  <div className="font-medium text-[#1F2937]">Balanced</div>
+                </div>
+              </div>
             </div>
+
+ 
+            <div className="mt-5 grid grid-cols-3 gap-3">
+              <button className="p-3 bg-white rounded-lg border border-[#E6E9EB] text-xs font-medium shadow-sm hover:bg-[#FBFDFF]">Projects</button>
+              <button className="p-3 bg-white rounded-lg border border-[#E6E9EB] text-xs font-medium shadow-sm hover:bg-[#FBFDFF]">Tasks</button>
+              <button className="p-3 bg-white rounded-lg border border-[#E6E9EB] text-xs font-medium shadow-sm hover:bg-[#FBFDFF]">Teams</button>
+            </div>
+          </div>
+
+     
+          <div className="px-6 py-4 border-t border-[#EEF2F4] bg-white/60 flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 bg-[#8FABD4] rounded-md flex items-center justify-center text-white font-semibold">TM</div>
+            
+            </div>
+
+            <div className="flex items-center gap-3">
+             
+              <NavLink to='/dashboard'>  
+                <button className="px-3 py-1.5 rounded-lg text-sm text-white" style={{ background: "linear-gradient(90deg,#8FABD4,#6FA8D6)" }}>
+                Try it
+              </button>
+              </NavLink>
+            </div>
+          </div>
+        </div>
+
+        {/* subtle reflection bar */}
+        <div className="mt-5 text-center">
+          <div className="inline-block w-44 h-1 rounded-full" style={{ background: "linear-gradient(90deg, rgba(143,187,212,0.08), rgba(143,187,212,0.02))" }} />
+        </div>
+      </div>
+    </div>
           </div>
 
          
