@@ -7,12 +7,18 @@ import Register from "../auth/Register";
 import Teams from "../pages/Teams";
 import Projects from "../pages/Projects";
 import Tasks from "../pages/Tasks";
+import HomePage from "../pages/HomePage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App/>,
     children: [
+        {
+            element:<HomePage/>,
+            path:"/",
+            index:true
+        },
         {
             element:<Login/>,
             path:"/login"
