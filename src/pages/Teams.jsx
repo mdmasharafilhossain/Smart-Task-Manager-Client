@@ -4,15 +4,22 @@ import { useForm } from "react-hook-form";
 
 import Swal from "sweetalert2";
 import api from "../utils/api";
+import Loader from "../components/shared/Loader";
 
 export default function Teams() {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
   const { register: regM, handleSubmit: handleMember, reset: resetM, formState: { errors: errorsM } } = useForm();
   const [teams, setTeams] = useState([]);
-
+const [loading, setLoading] = useState(true);
   const load = async () => {
-    const { data } = await api.get("/teams");
+    try {
+        const { data } = await api.get("/teams");
     setTeams(data);
+    } catch (error) {
+        console.error("Failed to load teams", error);
+    }finally {
+        setLoading(false);
+    }
   };
   useEffect(() => { load(); }, []);
 
@@ -31,7 +38,7 @@ export default function Teams() {
     await load();
     Swal.fire("Added", `Member "${data.name}" added`, "success");
   };
-
+if(loading) return <Loader/>;
   return (
     <div className="space-y-6 p-4">
       {/* Create Team Card */}

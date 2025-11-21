@@ -1,20 +1,29 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/set-state-in-effect */
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import api from "../utils/api";
 import Swal from "sweetalert2";
+import Loader from "../components/shared/Loader";
 
 export default function Projects() {
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm();
   const [teams, setTeams] = useState([]);
   const [projects, setProjects] = useState([]);
-  
+  const [loading, setLoading] = useState(true);
 
   const load = async () => {
-    const t = await api.get("/teams");
-    setTeams(t.data);
-    const p = await api.get("/projects");
-    setProjects(p.data);
+    try {
+      const t = await api.get("/teams");
+      setTeams(t.data);
+
+      const p = await api.get("/projects");
+      setProjects(p.data);
+    } catch (e) {
+      Swal.fire("Error", "Failed to load data", "error");
+    } finally {
+      setLoading(false);  
+    }
   };
 
   useEffect(() => { load(); }, []);
@@ -29,7 +38,7 @@ export default function Projects() {
       Swal.fire("Error", e?.response?.data?.message || "Failed", "error");
     }
   };
-
+if(loading) return <Loader/>;
   return (
     <div className="space-y-6 p-4">
       {/* Create Project Card */}
