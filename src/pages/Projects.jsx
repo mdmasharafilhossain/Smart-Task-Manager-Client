@@ -8,7 +8,7 @@ export default function Projects() {
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm();
   const [teams, setTeams] = useState([]);
   const [projects, setProjects] = useState([]);
-  console.log(projects,"Projects");
+  
 
   const load = async () => {
     const t = await api.get("/teams");

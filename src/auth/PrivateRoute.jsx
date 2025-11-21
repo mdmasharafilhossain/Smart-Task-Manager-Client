@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router";
 import api from "../utils/api";
+import Loader from "../components/shared/Loader";
 
 export default function PrivateRoute({ children }) {
   const [loading, setLoading] = useState(true);
@@ -26,7 +27,7 @@ export default function PrivateRoute({ children }) {
       });
   }, []);
 
-  if (loading) return <div>checking.....</div>;
+  if (loading) return <Loader/>;
 
   if (!allowed) return <Navigate to="/login" replace />;
 
