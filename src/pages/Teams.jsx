@@ -50,7 +50,7 @@ export default function Teams() {
 
           <button
             type="submit"
-            className="px-4 py-2 bg-gradient-to-r from-[#8FABD4] to-[#6FA8D6] text-white rounded-lg shadow-sm"
+            className="px-4 py-2 bg-linear-to-r from-[#8FABD4] to-[#6FA8D6] text-white rounded-lg shadow-sm"
           >
             Create
           </button>
@@ -61,7 +61,7 @@ export default function Teams() {
       {teams.map(t => (
         <div key={t._id} className="bg-white p-5 rounded-2xl shadow-sm border border-[#8FABD4]/10">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-lg font-semibold text-[#1F2937]">{t.name}</h2>
+            <h2 className="text-xl font-semibold text-[#1F2937]">Team Name: {t.name}</h2>
             <div className="text-sm text-[#4A4A4A]">Members: {t.members?.length || 0}</div>
           </div>
 
@@ -116,7 +116,7 @@ export default function Teams() {
               </div>
 
               <div>
-                <button className="w-full py-2 bg-gradient-to-r from-[#8FABD4] to-[#6FA8D6] text-white rounded-lg shadow-sm">Add</button>
+                <button className="w-full py-2 bg-linear-to-r from-[#8FABD4] to-[#6FA8D6] text-white rounded-lg shadow-sm">Add</button>
               </div>
             </form>
           </div>
