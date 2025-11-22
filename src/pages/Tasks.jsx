@@ -290,12 +290,12 @@ export default function Tasks() {
   className="flex items-center gap-2 px-3 py-1 rounded border hover:shadow-sm text-sm w-full sm:w-auto justify-center"
   onClick={async () => {
     try {
-      // fetch member loads for this project (same as before)
+      
       const projId = t.projectId;
       const resp = await api.get(`/tasks/member-loads/${projId}`);
       const memberList = resp.data || [];
 
-      // build HTML select (we return the selected value via preConfirm)
+     
       const selectHtml = `
         <div style="text-align:left;">
           <label style="display:block;margin-bottom:6px;color:#374151;font-size:13px;">Select assignee</label>
@@ -311,7 +311,7 @@ export default function Tasks() {
         html: selectHtml,
         showCancelButton: true,
         confirmButtonText: "Assign",
-        focusConfirm: false,           // prevents auto-focusing confirm so user can open dropdown
+        focusConfirm: false,           
         preConfirm: () => {
           const el = document.getElementById("swal-select");
           return el ? el.value : null;
@@ -320,10 +320,10 @@ export default function Tasks() {
 
       if (!result.isConfirmed) return;
 
-      const selectedValue = result.value; // "" => unassigned, otherwise memberId
+      const selectedValue = result.value; 
       const payload = { assigneeId: selectedValue === "" ? null : selectedValue };
 
-      // update task and refresh (same API calls as before)
+    
       await api.put(`/tasks/${t._id}`, payload);
       await loadTasks();
       if (chosenProject) await loadMemberLoads(chosenProject);

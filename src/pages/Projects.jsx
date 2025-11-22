@@ -41,7 +41,7 @@ export default function Projects() {
 if(loading) return <Loader/>;
   return (
     <div className="space-y-6 p-4">
-      {/* Create Project Card */}
+   
       <div className="bg-white p-6 rounded-2xl shadow-md border border-[#8FABD4]/10">
         <h1 className="text-lg font-semibold mb-4 text-[#1F2937]">Create Project</h1>
 

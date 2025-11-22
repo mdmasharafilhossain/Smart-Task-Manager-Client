@@ -11,12 +11,7 @@ export default function AuthProvider({ children }) {
     return raw ? JSON.parse(raw) : null;
   });
 
-//   const login = (data) => {
-//     localStorage.setItem("token", JSON.stringify(data.token));
-    
-//     localStorage.setItem("user", JSON.stringify(data.user));
-//     setUser(data.user);
-//   };
+
 const login = (data) => {
   localStorage.setItem("token", JSON.stringify(data.token));
 

@@ -55,13 +55,13 @@ const [showPassword, setShowPassword] = useState(false);
 
             <div className="relative">
               <input
-                type={showPassword ? "text" : "password"} // 👈 dynamic type
+                type={showPassword ? "text" : "password"} 
                 {...register("password", { required: "Password is required" })}
                 className="w-full border border-[#E6E9EB] px-4 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8FABD4]/40"
                 placeholder="••••••••"
               />
 
-              {/* 👁 Icon Toggle */}
+              
               <button
                 type="button"
                 onClick={() => setShowPassword((prev) => !prev)}
@@ -76,13 +76,6 @@ const [showPassword, setShowPassword] = useState(false);
             )}
           </div>
 
-          {/* <div className="flex items-center justify-between">
-            <label className="inline-flex items-center gap-2 text-sm text-[#4A4A4A]">
-              <input type="checkbox" className="w-4 h-4 rounded border-gray-300" />
-              Remember me
-            </label>
-            <Link to="/forgot" className="text-sm underline text-[#4A4A4A]">Forgot?</Link>
-          </div> */}
 
           <button
             type="submit"

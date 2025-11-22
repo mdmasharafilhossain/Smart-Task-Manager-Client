@@ -47,11 +47,11 @@ export default function Dashboard() {
 
   return (
     <div className="space-y-6 p-4">
-      {/* Stats */}
+     
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <div className="bg-white p-4 rounded-2xl shadow border border-[#8FABD4]/8 flex items-center gap-4">
           <div className="w-12 h-12 rounded-lg bg-[#8FABD4]/20 flex items-center justify-center text-xl font-bold text-[#285e7a]">
-            {/* icon */}
+        
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="#285e7a"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 17v-6a2 2 0 012-2h2a2 2 0 012 2v6" /></svg>
           </div>
           <div>
