@@ -199,7 +199,7 @@ export default function Tasks() {
             onChange={e => setFilters(f => ({ ...f, projectId: e.target.value }))}
           >
             <option value="">All Projects</option>
-            {projects.map(p => <option key={p._id} value={p._1d}>{p.name}</option>)}
+            {projects.map(p => <option key={p._id} value={p._id}>{p.name}</option>)}
           </select>
 
           <select
@@ -285,28 +285,60 @@ export default function Tasks() {
          
               <td className="p-3 align-top">
               <div className="flex gap-2">
+                {/* Assign Button */}
                 <button
-                  className="flex items-center gap-2 px-3 py-1 rounded border hover:shadow-sm text-sm"
-                  onClick={async () => {
-                    const res = await Swal.fire({
-                      input: "select",
-                      inputOptions: {
-                        "": "Unassigned",
-                        ...Object.fromEntries(members.map(m => [m.memberId, `${m.name} (${m.load}/${m.capacity})`]))
-                      },
-                      inputPlaceholder: "Select assignee",
-                      showCancelButton: true
-                    });
-                    if (!res.isConfirmed) return;
-                    await api.put(`/tasks/${t._id}`, { assigneeId: res.value === "" ? null : res.value });
-                    await loadTasks();
-                    Swal.fire("Success", "Assignee updated", "success");
-                  }}
-                >
-           
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5.121 17.804A5 5 0 0112 15a5 5 0 016.879 2.804M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-                  <span>Reassign</span>
-                </button>
+  className="flex items-center gap-2 px-3 py-1 rounded border hover:shadow-sm text-sm w-full sm:w-auto justify-center"
+  onClick={async () => {
+    try {
+      // fetch member loads for this project (same as before)
+      const projId = t.projectId;
+      const resp = await api.get(`/tasks/member-loads/${projId}`);
+      const memberList = resp.data || [];
+
+      // build HTML select (we return the selected value via preConfirm)
+      const selectHtml = `
+        <div style="text-align:left;">
+          <label style="display:block;margin-bottom:6px;color:#374151;font-size:13px;">Select assignee</label>
+          <select id="swal-select" style="width:100%;padding:8px 10px;border-radius:8px;border:1px solid #e6e9eb;font-size:14px;">
+            <option value="">Unassigned</option>
+            ${memberList.map(m => `<option value="${m.memberId}">${m.name} (${m.load}/${m.capacity})</option>`).join('')}
+          </select>
+        </div>
+      `;
+
+      const result = await Swal.fire({
+        title: "Choose assignee",
+        html: selectHtml,
+        showCancelButton: true,
+        confirmButtonText: "Assign",
+        focusConfirm: false,           // prevents auto-focusing confirm so user can open dropdown
+        preConfirm: () => {
+          const el = document.getElementById("swal-select");
+          return el ? el.value : null;
+        }
+      });
+
+      if (!result.isConfirmed) return;
+
+      const selectedValue = result.value; // "" => unassigned, otherwise memberId
+      const payload = { assigneeId: selectedValue === "" ? null : selectedValue };
+
+      // update task and refresh (same API calls as before)
+      await api.put(`/tasks/${t._id}`, payload);
+      await loadTasks();
+      if (chosenProject) await loadMemberLoads(chosenProject);
+
+      Swal.fire("Success", "Assignee updated", "success");
+    } catch (err) {
+      console.error("Reassign error:", err);
+      Swal.fire("Error", err?.response?.data?.message || "Failed to reassign", "error");
+    }
+  }}
+>
+  Reassign
+</button>
+
+
 
                 <button
                   className="flex items-center gap-2 px-3 py-1 rounded border hover:shadow-sm text-sm"
@@ -391,20 +423,54 @@ export default function Tasks() {
         <div className="mt-3 flex flex-wrap gap-2">
           <button
             className="flex items-center gap-2 px-3 py-1 rounded border text-sm"
-            onClick={async () => {
-              const res = await Swal.fire({
-                input: "select",
-                inputOptions: {
-                  "": "Unassigned",
-                  ...Object.fromEntries(members.map(m => [m.memberId, `${m.name} (${m.load}/${m.capacity})`]))
-                },
-                inputPlaceholder: "Select assignee",
-                showCancelButton: true
-              });
-              if (!res.isConfirmed) return;
-              await api.put(`/tasks/${t._id}`, { assigneeId: res.value === "" ? null : res.value });
-              await loadTasks();
-            }}
+         
+onClick={async () => {
+    try {
+     
+      const projId = t.projectId;
+      const resp = await api.get(`/tasks/member-loads/${projId}`);
+      const memberList = resp.data || [];
+
+      
+      const selectHtml = `
+        <div style="text-align:left;">
+          <label style="display:block;margin-bottom:6px;color:#374151;font-size:13px;">Select assignee</label>
+          <select id="swal-select" style="width:100%;padding:8px 10px;border-radius:8px;border:1px solid #e6e9eb;font-size:14px;">
+            <option value="">Unassigned</option>
+            ${memberList.map(m => `<option value="${m.memberId}">${m.name} (${m.load}/${m.capacity})</option>`).join('')}
+          </select>
+        </div>
+      `;
+
+      const result = await Swal.fire({
+        title: "Choose assignee",
+        html: selectHtml,
+        showCancelButton: true,
+        confirmButtonText: "Assign",
+        focusConfirm: false,           
+        preConfirm: () => {
+          const el = document.getElementById("swal-select");
+          return el ? el.value : null;
+        }
+      });
+
+      if (!result.isConfirmed) return;
+
+      const selectedValue = result.value; 
+      const payload = { assigneeId: selectedValue === "" ? null : selectedValue };
+
+    
+      await api.put(`/tasks/${t._id}`, payload);
+      await loadTasks();
+      if (chosenProject) await loadMemberLoads(chosenProject);
+
+      Swal.fire("Success", "Assignee updated", "success");
+    } catch (err) {
+      console.error("Reassign error:", err);
+      Swal.fire("Error", err?.response?.data?.message || "Failed to reassign", "error");
+    }
+  }}
+
           >
             Reassign
           </button>

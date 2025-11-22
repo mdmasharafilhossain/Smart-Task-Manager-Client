@@ -32,6 +32,7 @@ export default function Dashboard() {
     });
     if (!isConfirmed) return;
     const res = await api.post("/dashboard/reassign");
+    console.log(res.data , "Data");
     await load();
     Swal.fire("Done", `${res.data.moves.length} tasks moved (showing last 5).`, "success");
   };
