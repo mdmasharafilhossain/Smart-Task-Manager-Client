@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import  { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import api from "../utils/api";

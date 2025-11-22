@@ -1,13 +1,14 @@
 import { createBrowserRouter } from "react-router";
 import App from "../App";
 import Login from "../auth/Login";
-import Dashboard from "../pages/dashboard";
+
 import PrivateRoute from "../auth/PrivateRoute";
 import Register from "../auth/Register";
 import Teams from "../pages/Teams";
 import Projects from "../pages/Projects";
 import Tasks from "../pages/Tasks";
 import HomePage from "../pages/HomePage";
+import Dashboard from "../pages/Dashboard";
 
 export const router = createBrowserRouter([
   {
