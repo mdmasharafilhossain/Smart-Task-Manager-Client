@@ -7,7 +7,7 @@ import Loader from "../components/Shared/Loader";
 export default function PrivateRoute({ children }) {
   const [loading, setLoading] = useState(true);
   const [allowed, setAllowed] = useState(false);
-
+const token =  localStorage.getItem("token");
   useEffect(() => {
     api
       .get("/auth/me")
@@ -29,7 +29,7 @@ export default function PrivateRoute({ children }) {
 
   if (loading) return <Loader/>;
 
-  if (!allowed) return <Navigate to="/login" replace />;
+  if (!allowed || !token) return <Navigate to="/login" replace />;
 
   return children;
 }
