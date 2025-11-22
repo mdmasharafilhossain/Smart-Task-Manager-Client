@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router";
 import { Menu } from "lucide-react";
 import { useContext,  useState } from "react";
-import { AuthContext } from "../../auth/AuthContext";
+import { AuthContext } from "../../auth/AuthContext.jsx";
 import Swal from "sweetalert2";
 
 

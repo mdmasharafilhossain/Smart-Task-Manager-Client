@@ -2,9 +2,9 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import api from "../utils/api";
+import api from "../utils/api.js";
 import Swal from "sweetalert2";
-import Loader from "../components/shared/Loader";
+import Loader from "../components/Shared/Loader.jsx";
 
 export default function Projects() {
   const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm();

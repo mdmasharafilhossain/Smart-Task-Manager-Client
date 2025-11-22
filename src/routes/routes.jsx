@@ -1,14 +1,14 @@
 import { createBrowserRouter } from "react-router";
-import App from "../App";
-import Login from "../auth/Login";
+import App from "../App.jsx";
+import Login from "../auth/Login.jsx";
 
-import PrivateRoute from "../auth/PrivateRoute";
-import Register from "../auth/Register";
-import Teams from "../pages/Teams";
-import Projects from "../pages/Projects";
-import Tasks from "../pages/Tasks";
-import HomePage from "../pages/HomePage";
-import Dashboard from "../pages/Dashboard";
+import PrivateRoute from "../auth/PrivateRoute.jsx";
+import Register from "../auth/Register.jsx";
+import Teams from "../pages/Teams.jsx";
+import Projects from "../pages/Projects.jsx";
+import Tasks from "../pages/Tasks.jsx";
+import HomePage from "../pages/HomePage.jsx";
+import Dashboard from "../pages/dashboard.jsx";
 
 export const router = createBrowserRouter([
   {

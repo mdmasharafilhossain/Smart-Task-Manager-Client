@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import Swal from "sweetalert2";
-import api from "../utils/api";
-import Loader from "../components/shared/Loader";
+import api from "../utils/api.js";
+import Loader from "../components/Shared/Loader.jsx";
 
 export default function Teams() {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
